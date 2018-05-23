@@ -1,13 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  watch: {
+    '$route': ['updateHistoryLength']
+  },
+  methods: {
+    updateHistoryLength () {
+      console.log(history.length)
+      sessionStorage.setItem('history.length', history.length)
+    }
+  }
 }
 </script>
 
