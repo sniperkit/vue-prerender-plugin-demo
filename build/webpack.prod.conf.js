@@ -1,4 +1,7 @@
 'use strict'
+import router from '../src/router'
+import routeParams from '../src/route-params.json'
+
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
@@ -10,6 +13,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const VuePrerenderPlugin = require('vue-prerender-plugin')
 
 const env = require('../config/prod.env')
 
@@ -116,7 +120,16 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+
+    // prerender sites
+    new VuePrerenderPlugin({
+      baseUrl: 'http://127.0.0.1/vue-prerender-plugin-demo/',
+      outputDir: config.build.assetsRoot,
+      needPrerender: process.env.npm_config_prerender,
+      router,
+      routeParams,
+    })
   ]
 })
 

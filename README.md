@@ -1,7 +1,3 @@
-# vue-prerender-plugin-demo
-
-> vue prerender plugin demo
-
 ## Build Setup
 
 ``` bash
@@ -16,4 +12,7 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# build for production with minification and prerender the sites
+npm run build --prerender
 ```
